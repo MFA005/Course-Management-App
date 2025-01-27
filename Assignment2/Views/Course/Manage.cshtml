@@ -1,0 +1,81 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "Manage Course";
+}
+
+<h1>Manage Course</h1>
+<br />
+<!-- Navigation Links -->
+<div class="btn-group" role="group">
+    <a asp-action="Index" class=" btn btn-primary">All Courses</a>
+    <a asp-action="Edit" asp-route-id="@Model.CourseId" class="btn btn-warning">Edit This Course</a>
+    <a asp-action="Create" class="btn btn-success">Add New Course</a>
+</div>
+<hr />
+<p>
+    <strong>Course Summary</strong>
+    <br />
+    
+    "@Model.Name" starts on @Model.StartDate.ToShortDateString() in room @Model.RoomNumber and the instructor is "@Model.Instructor".
+    
+</p>
+
+<hr />
+
+<h3>Students in this Course</h3>
+
+<!-- Table of Students -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Enrollment Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>@student.Name</td>
+                <td>@student.Email</td>
+                <td>@student.EnrollmentStatus</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<!-- Add New Student Form -->
+<h4>Add a New Student</h4>
+<br />
+<form asp-action="AddStudent" method="post">
+    <input type="hidden" name="id" value="@Model.CourseId" />
+    <div class="d-flex form-group">
+        <label class="me-2" for="studentName">Name</label>
+        <input type="text" class="form-control" id="studentName" name="studentName" required />
+    
+        <label class="ms-2 me-2" for="studentEmail">Email</label>
+        <input type="email" class="form-control" id="studentEmail" name="studentEmail" required />
+    </div>
+    <button type="submit" class="mt-4 btn btn-primary">Add Student</button>
+</form>
+
+<hr />
+
+<!-- Send Confirmation Emails Button -->
+<h4>Send Confirmation Emails</h4>
+<br />
+<div class="d-flex">
+<form asp-action="SendConfirmationMessages" method="post">
+    <input type="hidden" name="id" value="@Model.CourseId" />
+    <button type="submit" class="me-3 btn btn-success">Send Confirmation Emails</button>
+</form>
+
+
+
+    <a asp-action="Index" class="btn btn-secondary">Back to Course List</a>
+
+</div>

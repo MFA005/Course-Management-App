@@ -1,0 +1,12 @@
+﻿@model EnrollmentConfirmationViewModel
+
+<h2>Enrollment Status</h2>
+
+@if (Model.EnrollmentStatus == EnrollmentStatus.EnrollmentConfirmed)
+{
+    <p>Your enrollment has been successfully confirmed!</p>
+}
+else if (Model.EnrollmentStatus == EnrollmentStatus.EnrollmentDeclined)
+{
+    <p>Your enrollment has been declined.</p>
+}

@@ -1,0 +1,32 @@
+﻿@model EnrollmentConfirmationViewModel
+
+@{
+    ViewData["Title"] = "Enrollment Confirmation";
+}
+
+<p>Hello, @Model.StudentName!</p>
+<p>
+    Please confirm your enrollment for the course <strong>@Model.CourseName</strong>.
+</p>
+
+<form class="" method="post" asp-action="ConfirmEnrollment">
+    <div class="form-group">
+    <input type="hidden" name="StudentId" value="@Model.StudentId" />
+    <input type="hidden" name="CourseId" value="@Model.CourseId" />
+
+    <div>
+        <input type="radio" id="yes" name="IsConfirmed" value="true" />
+        <label for="yes">Yes</label>
+    </div>
+    <div>
+        <input type="radio" id="no" name="IsConfirmed" value="false" />
+        <label for="no">No</label>
+    </div>
+
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+
+
+
